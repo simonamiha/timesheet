@@ -62,10 +62,5 @@ namespace Timesheet.Controller
             return Ok();
         }
 
-        [HttpPost]
-        [Route("editEmployee")]
-        public Task<ActionResult> EditEmployee(Employee employee)
-        {
-        }
     }
 }

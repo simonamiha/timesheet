@@ -61,5 +61,11 @@ namespace Timesheet.Controller
             await _processStorage.DeleteAll();
             return Ok();
         }
+
+        [HttpPost]
+        [Route("editEmployee")]
+        public Task<ActionResult> EditEmployee(Employee employee)
+        {
+        }
     }
 }

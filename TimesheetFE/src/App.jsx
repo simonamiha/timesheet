@@ -15,7 +15,9 @@ export default function App() {
 
   return (
     <div>
-      <Navbar />
+      <div>
+        <Navbar />
+      </div>
       <div className='page-container'>
         <input placeholder="Enter Employee Id" className='input-smecher' onInput={event => setQuery(event.target.value)} />
         {query && <Employee id={query} />}

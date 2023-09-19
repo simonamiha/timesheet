@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 using Timesheet.Data;
 using Timesheet.Interfaces;
 
@@ -34,6 +33,30 @@ namespace Timesheet.Services
         public async Task<Employee> GetEmployee(int id)
         {
             return await _employeeContext.Employees.FirstOrDefaultAsync(x => x.EmployeeId == id);
+        }
+
+        public async Task<Employee> UpdateEmployee(int id, Employee employee)
+        {
+            _employeeContext.Entry(employee).State = EntityState.Modified;
+
+            try
+            {
+                await _employeeContext.SaveChangesAsync();
+            }
+
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_employeeContext.Employees.Any(p => p.EmployeeId == id))
+                {
+                    return null;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return employee;
         }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
 using System.Web.Http.Cors;
-using Timesheet.Data;
 using Timesheet.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -53,6 +50,19 @@ namespace Timesheet.Controller
             return Ok(result);
         }
 
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Employee>> PutProduct(
+            int id, Employee employee)
+        {
+            if (id < 0)
+            {
+                return BadRequest();
+            }
+
+            var result = await _processStorage.UpdateEmployee(id, employee);
+
+            return Ok(result);
+        }
 
         [HttpPost]
         [Route("deleteAll")]

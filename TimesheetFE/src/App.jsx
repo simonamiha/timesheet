@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import './App.css'
-import EmployeeTable from './EmployeeTable'
 import Employee from './Employee';
 import Navbar from './Navbar';
+import './Navbar.css'
 
 export default function App() {
 
@@ -14,16 +14,8 @@ export default function App() {
   }
 
   return (
-    <div>
       <div>
         <Navbar />
       </div>
-      <div className='page-container'>
-        <input placeholder="Enter Employee Id" className='input-smecher' onInput={event => setQuery(event.target.value)} />
-        {query && <Employee id={query} />}
-        <button onClick={handleClick}>Show All Employees</button>
-        {isShown && <EmployeeTable />}
-      </div>
-    </div>
   );
 }

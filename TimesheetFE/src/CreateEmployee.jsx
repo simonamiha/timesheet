@@ -1,4 +1,7 @@
 import { useState } from "react";
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 const CreateEmployee = () => {
     const [lastName, setLastName] = useState(null);
@@ -33,24 +36,21 @@ const CreateEmployee = () => {
             console.log(err);
         }
     };
-  
+
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <fieldset>
-                <p>Last Name</p>
-                <input className = 'input-smecher' value={lastName} onChange={(event) => setLastName(event.target.value)}/> 
-                <p>First Name</p>
-                <input className = 'input-smecher' value={firstName} onChange={(event) => setFirstName(event.target.value)}/>
-                <p>Job Title</p>
-                <input className = 'input-smecher' value={jobTitle} onChange={(event) => setJobTitle(event.target.value)}/>
-                <p>Department Name</p>
-                <input className = 'input-smecher' value={departmentName} onChange={(event) => setDepartmentName(event.target.value)}/>
-                </fieldset>
-                <button type = "submit">Submit</button>
-            </form>
-        </div>
+        <Box component="form" onSubmit={handleSubmit} sx={{ '& > :not(style)': { m: 1, width: '25ch' }, }}
+            noValidate
+            autoComplete="off"
+        >
+            <fieldset>
+                <TextField id="outlined-basic" label="Last Name" variant="outlined" value={lastName} onChange={(event) => setLastName(event.target.value)} />
+                <TextField id="outlined-basic" label="First Name" variant="outlined" value={firstName} onChange={(event) => setFirstName(event.target.value)} />
+                <TextField id="outlined-basic" label="Job Title" variant="outlined" value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} />
+                <TextField id="outlined-basic" label="Department Name" variant="outlined" value={departmentName} onChange={(event) => setDepartmentName(event.target.value)} />
+            </fieldset>
+            <Button type="submit" variant="contained">Submit</Button>
+        </Box>
     )
-  }
-  
-  export default CreateEmployee;
+}
+
+export default CreateEmployee;

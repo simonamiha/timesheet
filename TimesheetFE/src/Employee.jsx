@@ -40,6 +40,10 @@ const Employee = ({ id }) => {
           </tr>
         </tbody>
       </table>
+
+      <h1>{employee.lastName} {employee.firstName} ({employee.employeeId})</h1>
+      <h2>Job Title: {employee.jobTitle}</h2>
+      <h2>Department: {employee.departmentName}</h2>
     </div>
   )
 }

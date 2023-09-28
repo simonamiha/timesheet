@@ -50,16 +50,16 @@ namespace Timesheet.Controller
             return Ok(result);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("updateemployee")]
         public async Task<ActionResult<Employee>> PutProduct(
-            int id, Employee employee)
+            Employee employee)
         {
-            if (id < 0)
+            if (employee.EmployeeId < 0)
             {
                 return BadRequest();
             }
 
-            var result = await _processStorage.UpdateEmployee(id, employee);
+            var result = await _processStorage.UpdateEmployee(employee);
 
             return Ok(result);
         }

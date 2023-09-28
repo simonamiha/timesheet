@@ -35,7 +35,7 @@ namespace Timesheet.Services
             return await _employeeContext.Employees.FirstOrDefaultAsync(x => x.EmployeeId == id);
         }
 
-        public async Task<Employee> UpdateEmployee(int id, Employee employee)
+        public async Task<Employee> UpdateEmployee(Employee employee)
         {
             _employeeContext.Entry(employee).State = EntityState.Modified;
 
@@ -46,7 +46,7 @@ namespace Timesheet.Services
 
             catch (DbUpdateConcurrencyException)
             {
-                if (!_employeeContext.Employees.Any(p => p.EmployeeId == id))
+                if (!_employeeContext.Employees.Any(p => p.EmployeeId == employee.EmployeeId))
                 {
                     return null;
                 }

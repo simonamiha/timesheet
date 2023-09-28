@@ -10,6 +10,6 @@
 
         Task<Employee> CreateEmployee(Employee employee);
 
-        Task<Employee> UpdateEmployee(int id, Employee employee);
+        Task<Employee> UpdateEmployee(Employee employee);
     }
 }

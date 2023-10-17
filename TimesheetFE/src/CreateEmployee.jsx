@@ -9,6 +9,8 @@ const CreateEmployee = () => {
     const [jobTitle, setJobTitle] = useState(null);
     const [departmentName, setDepartmentName] = useState(null);
 
+    const [error, setError] = useState(null);
+
     const handleSubmit = async event => {
         event.preventDefault();
         try {
@@ -22,18 +24,25 @@ const CreateEmployee = () => {
                     departmentName: departmentName,
                 }),
             });
-            await res.json();
+            let data = await res.json(); //you must save response from fetch in a different variable in order to access the properties
             if (res.status === 200) {
                 setLastName("");
                 setFirstName("");
                 setJobTitle("");
                 setDepartmentName("");
                 alert("Added employee.")
-            } else {
-                alert("Some error occured.");
+            } 
+            else {
+                setError(data.title);
+                alert(error);
             }
-        } catch (err) {
-            console.log(err);
+
+            // TODO:
+            // handle error from completely null form, it returns an object with title
+            // handle error from array when certain fields are not correct, iterate through errors in errorMessage
+
+        } catch (error) {
+            console.log(error);
         }
     };
 

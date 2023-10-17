@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using System.Web.Http.Cors;
 using Timesheet.Interfaces;
 
@@ -40,20 +41,37 @@ namespace Timesheet.Controller
                 return NotFound();
             }
             return Ok(employee);
-        }
+        }   
 
         [HttpPost]
         [Route("createemployee")]
         public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
         {
+            EmployeeValidator validator = new EmployeeValidator();
+
+            var validationResult = validator.Validate(employee);
+
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
+
             var result = await _processStorage.CreateEmployee(employee);
             return Ok(result);
         }
 
         [HttpPut("updateemployee")]
-        public async Task<ActionResult<Employee>> PutProduct(
-            Employee employee)
+        public async Task<ActionResult<Employee>> PutProduct(Employee employee)
         {
+            EmployeeValidator validator = new EmployeeValidator();
+
+            var validationResult = validator.Validate(employee);
+
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
+
             if (employee.EmployeeId < 0)
             {
                 return BadRequest();

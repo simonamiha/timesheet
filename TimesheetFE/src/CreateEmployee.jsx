@@ -33,7 +33,11 @@ const CreateEmployee = () => {
                 alert("Added employee.")
             } 
             else {
-                setError(data.title);
+                var err = "";
+                for (var i = 0; i < data.length; i++)
+                {   err = err + "\r\n" + data[i].errorMessage;
+                };
+                setError(err)
                 alert(error);
             }
 

@@ -2,6 +2,8 @@ import { useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 const CreateEmployee = () => {
     const [lastName, setLastName] = useState(null);
@@ -30,20 +32,14 @@ const CreateEmployee = () => {
                 setFirstName("");
                 setJobTitle("");
                 setDepartmentName("");
-                alert("Added employee.")
             } 
             else {
                 var err = "";
                 for (var i = 0; i < data.length; i++)
                 {   err = err + "\r\n" + data[i].errorMessage;
                 };
-                setError(err)
-                alert(error);
             }
-
-            // TODO:
-            // handle error from completely null form, it returns an object with title
-            // handle error from array when certain fields are not correct, iterate through errors in errorMessage
+        setError(err);
 
         } catch (error) {
             console.log(error);
@@ -62,6 +58,10 @@ const CreateEmployee = () => {
                 <TextField id="outlined-basic" label="Department Name" variant="outlined" value={departmentName} onChange={(event) => setDepartmentName(event.target.value)} />
             </fieldset>
             <Button type="submit" variant="contained">Submit</Button>
+
+            <Stack sx={{ width: '100%' }} spacing={2}>
+                <Alert severity="error">{error}</Alert>
+            </Stack>
         </Box>
     )
 }

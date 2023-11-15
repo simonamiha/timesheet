@@ -12,8 +12,8 @@ using Timesheet.Data;
 namespace Timesheet.Migrations
 {
     [DbContext(typeof(EmployeeContext))]
-    [Migration("20231115200246_SoftDelete")]
-    partial class SoftDelete
+    [Migration("20231115203326_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -10,5 +10,6 @@ namespace Timesheet
         public string LastName { get; set; } = "";
         public string JobTitle { get; set; } = "";
         public string DepartmentName { get; set; } = "";
+        public bool IsDeleted { get; set; } = false;
     }
 }

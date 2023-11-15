@@ -18,6 +18,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddDbContext<EmployeeContext>();
+
 builder.Services.AddScoped<IProcessStorage, ProcessStorage>();
 
 builder.Services.AddCors(options =>

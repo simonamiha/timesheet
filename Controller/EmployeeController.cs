@@ -90,5 +90,13 @@ namespace Timesheet.Controller
             return Ok();
         }
 
+        [HttpPost]
+        [Route("deleteEmployee")]
+        public async Task<ActionResult> DeleteEmployee(int id)
+        {
+            await _processStorage.DeleteEmployee(id);
+            return Ok();
+        }
+
     }
 }

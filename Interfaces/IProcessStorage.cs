@@ -11,5 +11,7 @@
         Task<Employee> CreateEmployee(Employee employee);
 
         Task<Employee> UpdateEmployee(Employee employee);
+
+        Task DeleteEmployee(int id);
     }
 }

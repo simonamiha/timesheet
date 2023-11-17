@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Timesheet.Interfaces;
 
 namespace Timesheet
 {
-    public class Employee
+    public class Employee : ISoftDelete
     {
         [Key]
         public int? EmployeeId { get; set; } = null;

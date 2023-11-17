@@ -59,9 +59,10 @@ const CreateEmployee = () => {
             </fieldset>
             <Button type="submit" variant="contained">Submit</Button>
 
+            {error && 
             <Stack sx={{ width: '100%' }} spacing={2}>
                 <Alert severity="error">{error}</Alert>
-            </Stack>
+            </Stack>}
         </Box>
     )
 }

@@ -12,6 +12,7 @@ namespace Timesheet.Services
         {
             _employeeContext = emcxt;
         }
+
         public async Task<Employee> CreateEmployee(Employee employee)
         {
             var newEmployee = await _employeeContext.Employees.AddAsync(employee);
@@ -57,6 +58,18 @@ namespace Timesheet.Services
             }
 
             return employee;
+        }
+
+        public async Task DeleteEmployee(int id)
+        {
+            var deletedEmployee = await _employeeContext.Employees.FirstOrDefaultAsync(x => x.EmployeeId == id);
+
+            if (deletedEmployee != null)
+            {
+                _employeeContext.Employees.Remove(deletedEmployee);
+            }
+
+            await _employeeContext.SaveChangesAsync();
         }
     }
 }

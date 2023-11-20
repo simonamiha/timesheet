@@ -7,6 +7,8 @@ namespace Timesheet.Data
     {
         public DbSet<Employee> Employees { get; set; } = null!;
 
+        public DbSet<EmployeeLeave> Leaves { get; set; } = null!;
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=localhost;Database=master;Trusted_Connection=True;TrustServerCertificate=True;")

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -26,6 +27,22 @@ namespace Timesheet.Migrations
                 {
                     table.PrimaryKey("PK_Employees", x => x.EmployeeId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Leaves",
+                columns: table => new
+                {
+                    LeaveId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    LeaveStartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LeaveEndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LeaveStatus = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Leaves", x => x.LeaveId);
+                });
         }
 
         /// <inheritdoc />
@@ -33,6 +50,9 @@ namespace Timesheet.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Employees");
+
+            migrationBuilder.DropTable(
+                name: "Leaves");
         }
     }
 }

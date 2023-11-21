@@ -12,7 +12,7 @@ using Timesheet.Data;
 namespace Timesheet.Migrations
 {
     [DbContext(typeof(EmployeeContext))]
-    [Migration("20231115203326_Initial")]
+    [Migration("20231121210029_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -55,6 +55,31 @@ namespace Timesheet.Migrations
                     b.HasKey("EmployeeId");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("Timesheet.EmployeeLeave", b =>
+                {
+                    b.Property<int>("LeaveId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LeaveId"));
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LeaveEndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LeaveStartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LeaveStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("LeaveId");
+
+                    b.ToTable("Leaves");
                 });
 #pragma warning restore 612, 618
         }

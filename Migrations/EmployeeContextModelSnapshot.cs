@@ -56,11 +56,14 @@ namespace Timesheet.Migrations
 
             modelBuilder.Entity("Timesheet.EmployeeLeave", b =>
                 {
-                    b.Property<int>("EmployeeId")
+                    b.Property<int>("LeaveId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LeaveId"));
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("LeaveEndDate")
                         .HasColumnType("datetime2");
@@ -71,7 +74,7 @@ namespace Timesheet.Migrations
                     b.Property<int>("LeaveStatus")
                         .HasColumnType("int");
 
-                    b.HasKey("EmployeeId");
+                    b.HasKey("LeaveId");
 
                     b.ToTable("Leaves");
                 });

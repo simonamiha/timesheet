@@ -5,6 +5,8 @@ namespace Timesheet
     public class EmployeeLeave
     {
         [Key]
+        public int LeaveId { get; set; }
+
         public int EmployeeId { get; set; }
 
         public DateTime LeaveStartDate { get; set; }

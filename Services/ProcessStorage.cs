@@ -71,5 +71,24 @@ namespace Timesheet.Services
 
             await _employeeContext.SaveChangesAsync();
         }
+
+
+        public async Task<List<EmployeeLeave>> GetAllLeaves()
+        {
+            return await _employeeContext.Leaves.ToListAsync();
+        }
+
+
+        public async Task<EmployeeLeave> AddLeave(EmployeeLeave leave)
+        {
+            var check = await _employeeContext.Employees.Where(x => x.EmployeeId == leave.EmployeeId).SingleOrDefaultAsync();
+            if (check == null)
+            {
+                return null;
+            }
+            var newLeave = await _employeeContext.Leaves.AddAsync(leave);
+            await _employeeContext.SaveChangesAsync();
+            return newLeave.Entity;
+        }
     }
 }

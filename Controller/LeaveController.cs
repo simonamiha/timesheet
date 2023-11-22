@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Web.Http.Cors;
 using Timesheet.Data;
+using Timesheet.Interfaces;
 
 namespace Timesheet.Controller
 {
@@ -10,18 +12,18 @@ namespace Timesheet.Controller
     [EnableCors("*", "*", "*")]
     public class LeaveController : ControllerBase
     {
-        private readonly EmployeeContext _leaveContext;
+        private readonly IProcessStorage _processStorage;
 
-        public LeaveController(EmployeeContext lvcxt)
+        public LeaveController(IProcessStorage service)
         {
-            _leaveContext = lvcxt;
+            _processStorage = service;
         }
 
         [HttpGet]
         [Route("~/api/[controller]/getall")]
         public async Task<ActionResult> GetAllLeaves()
         {
-            var list = await _leaveContext.Leaves.ToListAsync();
+            var list = await _processStorage.GetAllLeaves();
             //var list = await _leaveContext.Leaves.Where(x => x.EmployeeId == 1).ToListAsync();
 
             if (list == null)
@@ -35,9 +37,14 @@ namespace Timesheet.Controller
         [Route("~/api/[controller]/addleave")]
         public async Task<ActionResult<EmployeeLeave>> AddLeave(EmployeeLeave leave)
         {
-            var newLeave = await _leaveContext.Leaves.AddAsync(leave);
-            await _leaveContext.SaveChangesAsync();
-            return newLeave.Entity;
+            var result = await _processStorage.AddLeave(leave);
+
+            if (result == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(result);
         }
     }
 }

@@ -13,5 +13,9 @@
         Task<Employee> UpdateEmployee(Employee employee);
 
         Task DeleteEmployee(int id);
+        
+        Task<List<EmployeeLeave>> GetAllLeaves();
+
+        Task<EmployeeLeave> AddLeave(EmployeeLeave leave);
     }
 }

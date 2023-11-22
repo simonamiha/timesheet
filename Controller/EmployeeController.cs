@@ -90,7 +90,7 @@ namespace Timesheet.Controller
             return Ok();
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("deleteEmployee")]
         public async Task<ActionResult> DeleteEmployee(int id)
         {

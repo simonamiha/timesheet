@@ -4,6 +4,7 @@ import FindEmployee from './FindEmployee';
 import './Navbar.css'
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import UpdateEmployee from './UpdateEmployee';
+import LeavesTable from './Leaves';
 
 const Navbar = () => {
 
@@ -15,6 +16,7 @@ const Navbar = () => {
           <li className='items'> <Link to="/CreateEmployee">Create Employee</Link> </li>
           <li className='items'> <Link to="/FindEmployee">Find Employee</Link></li>
           <li className='items'> <Link to="/UpdateEmployee">Update Employee</Link></li>
+          <li className='items'> <Link to="/Leaves">Leaves</Link></li>
         </ul>
       </nav>
 
@@ -23,6 +25,7 @@ const Navbar = () => {
         <Route path="/CreateEmployee" element={<CreateEmployee />}/>
         <Route path="/FindEmployee" element={<FindEmployee />}/>
         <Route path="/UpdateEmployee" element={<UpdateEmployee />}/>
+        <Route path="/Leaves" element={<LeavesTable />}/>
       </Routes>
     </Router>
   );

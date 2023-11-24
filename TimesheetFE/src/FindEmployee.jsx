@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import Employee from './Employee';
+import TextField from '@mui/material/TextField';
 
 const FindEmployee = () => {
 
@@ -9,7 +10,7 @@ const FindEmployee = () => {
   return (
     <div>
       <div className='page-container'>
-        <input placeholder="Enter Employee Id" className='input-smecher' onInput={event => setQuery(event.target.value)} />
+        <TextField placeholder="Enter Employee Id" className='input-smecher' id="outlined-basic" label="Employee Id" variant="outlined" onInput={event => setQuery(event.target.value)} />
         {query && <Employee id={query} />}
       </div>
     </div>

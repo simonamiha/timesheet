@@ -35,8 +35,8 @@ namespace Timesheet.Migrations
                     LeaveId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    LeaveStartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LeaveEndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LeaveStartDate = table.Column<DateTime>(type: "date", nullable: false),
+                    LeaveEndDate = table.Column<DateTime>(type: "date", nullable: false),
                     LeaveStatus = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

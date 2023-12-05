@@ -46,5 +46,13 @@ namespace Timesheet.Controller
 
             return Ok(result);
         }
+
+        [HttpPost]
+        [Route("~/api/[controller]/deleteAll")]
+        public async Task<ActionResult> DeleteAllLeaves()
+        {
+            await _processStorage.DeleteAllLeaves();
+            return Ok();
+        }
     }
 }

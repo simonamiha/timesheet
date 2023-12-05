@@ -17,5 +17,7 @@
         Task<List<EmployeeLeave>> GetAllLeaves();
 
         Task<EmployeeLeave> AddLeave(EmployeeLeave leave);
+
+        Task DeleteAllLeaves();
     }
 }

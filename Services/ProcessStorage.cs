@@ -90,5 +90,11 @@ namespace Timesheet.Services
             await _employeeContext.SaveChangesAsync();
             return newLeave.Entity;
         }
+
+        public async Task DeleteAllLeaves()
+        {
+            await _employeeContext.Leaves.ExecuteDeleteAsync();
+            await _employeeContext.SaveChangesAsync();
+        }
     }
 }

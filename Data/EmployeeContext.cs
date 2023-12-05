@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Timesheet.Services;
+using Timesheet.Services.Comparers;
 
 namespace Timesheet.Data
 {
@@ -8,6 +10,18 @@ namespace Timesheet.Data
         public DbSet<Employee> Employees { get; set; } = null!;
 
         public DbSet<EmployeeLeave> Leaves { get; set; } = null!;
+
+        protected override void ConfigureConventions(ModelConfigurationBuilder builder)
+        {
+            base.ConfigureConventions(builder);
+
+            builder.Properties<DateOnly>()
+                .HaveConversion<DateOnlyConverter, DateOnlyComparer>()
+                .HaveColumnType("date");
+
+            builder.Properties<TimeOnly>()
+                .HaveConversion<TimeOnlyConverter, TimeOnlyComparer>();
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -21,5 +35,4 @@ namespace Timesheet.Data
                 .HasQueryFilter(x => x.IsDeleted == false);
         }
     }
-
 }

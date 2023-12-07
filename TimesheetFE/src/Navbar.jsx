@@ -5,6 +5,7 @@ import './Navbar.css'
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import UpdateEmployee from './UpdateEmployee';
 import LeavesTable from './Leaves';
+import CreateLeave from './CreateLeave';
 
 const Navbar = () => {
 
@@ -17,6 +18,7 @@ const Navbar = () => {
           <li className='items'> <Link to="/FindEmployee">Find Employee</Link></li>
           <li className='items'> <Link to="/UpdateEmployee">Update Employee</Link></li>
           <li className='items'> <Link to="/Leaves">Leaves</Link></li>
+          <li className='items'> <Link to="/CreateLeave">AddLeave</Link></li>
         </ul>
       </nav>
 
@@ -26,6 +28,7 @@ const Navbar = () => {
         <Route path="/FindEmployee" element={<FindEmployee />}/>
         <Route path="/UpdateEmployee" element={<UpdateEmployee />}/>
         <Route path="/Leaves" element={<LeavesTable />}/>
+        <Route path="/CreateLeave" element={<CreateLeave />}/>
       </Routes>
     </Router>
   );

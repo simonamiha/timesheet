@@ -4,11 +4,11 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
 const UpdateEmployee = () => {
-    const [employeeId, setEmployeeId] = useState(null);
-    const [lastName, setLastName] = useState(null);
-    const [firstName, setFirstName] = useState(null);
-    const [jobTitle, setJobTitle] = useState(null);
-    const [departmentName, setDepartmentName] = useState(null);
+    const [employeeId, setEmployeeId] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [jobTitle, setJobTitle] = useState("");
+    const [departmentName, setDepartmentName] = useState("");
 
     const handleSubmit = async event => {
         event.preventDefault();

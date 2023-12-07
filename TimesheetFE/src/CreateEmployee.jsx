@@ -6,10 +6,10 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 
 const CreateEmployee = () => {
-    const [lastName, setLastName] = useState(null);
-    const [firstName, setFirstName] = useState(null);
-    const [jobTitle, setJobTitle] = useState(null);
-    const [departmentName, setDepartmentName] = useState(null);
+    const [lastName, setLastName] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [jobTitle, setJobTitle] = useState("");
+    const [departmentName, setDepartmentName] = useState("");
 
     const [error, setError] = useState(null);
 

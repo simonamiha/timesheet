@@ -86,6 +86,9 @@ namespace Timesheet.Services
             {
                 return null;
             }
+            var leaveDays = Helpers.CalculateWorkingDays.GetWorkingDays(leave.LeaveStartDate, leave.LeaveEndDate);
+            leave.LeaveWorkingDays = leaveDays;
+
             var newLeave = await _employeeContext.Leaves.AddAsync(leave);
             await _employeeContext.SaveChangesAsync();
             return newLeave.Entity;

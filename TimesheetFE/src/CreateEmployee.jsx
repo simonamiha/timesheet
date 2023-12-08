@@ -4,12 +4,14 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
+import Collapse from '@mui/material/Collapse';
 
 const CreateEmployee = () => {
     const [lastName, setLastName] = useState("");
     const [firstName, setFirstName] = useState("");
     const [jobTitle, setJobTitle] = useState("");
     const [departmentName, setDepartmentName] = useState("");
+    const [open, setOpen] = useState(false);
 
     const [error, setError] = useState(null);
 
@@ -32,6 +34,7 @@ const CreateEmployee = () => {
                 setFirstName("");
                 setJobTitle("");
                 setDepartmentName("");
+                setOpen(true);
             } 
             else {
                 var err = "";
@@ -58,6 +61,10 @@ const CreateEmployee = () => {
                 <TextField id="outlined-basic" label="Department Name" variant="outlined" value={departmentName} onChange={(event) => setDepartmentName(event.target.value)} />
             </fieldset>
             <Button type="submit" variant="contained">Submit</Button>
+
+            <Collapse in={open}>
+                <Alert onClick={() => {setOpen(false);}}>Employee created successfuly!</Alert>
+            </Collapse>
 
             {error && 
             <Stack sx={{ width: '100%' }} spacing={2}>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Timesheet.Data;
 
@@ -11,9 +12,11 @@ using Timesheet.Data;
 namespace Timesheet.Migrations
 {
     [DbContext(typeof(EmployeeContext))]
-    partial class EmployeeContextModelSnapshot : ModelSnapshot
+    [Migration("20231208113957_calculateWorkingDays")]
+    partial class calculateWorkingDays
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,9 +75,6 @@ namespace Timesheet.Migrations
                         .HasColumnType("date");
 
                     b.Property<int>("LeaveStatus")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LeaveWorkingDays")
                         .HasColumnType("int");
 
                     b.HasKey("LeaveId");

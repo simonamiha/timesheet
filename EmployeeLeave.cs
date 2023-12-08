@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Timesheet
 {
@@ -14,6 +16,9 @@ namespace Timesheet
         public DateOnly LeaveEndDate { get; set; }
 
         public LeaveStatus LeaveStatus { get; set; }
+
+        [JsonIgnore]
+        public int LeaveWorkingDays { get; set; }
 
     }
 }

@@ -2,6 +2,8 @@ import { useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
 
 const UpdateEmployee = () => {
     const [employeeId, setEmployeeId] = useState("");
@@ -9,6 +11,7 @@ const UpdateEmployee = () => {
     const [firstName, setFirstName] = useState("");
     const [jobTitle, setJobTitle] = useState("");
     const [departmentName, setDepartmentName] = useState("");
+    const [open, setOpen] = useState(false);
 
     const handleSubmit = async event => {
         event.preventDefault();
@@ -26,11 +29,12 @@ const UpdateEmployee = () => {
             });
             await res.json();
             if (res.status === 200) {
+                setEmployeeId("");
                 setLastName("");
                 setFirstName("");
                 setJobTitle("");
                 setDepartmentName("");
-                alert("Updated employee.")
+                setOpen(true);
             } else {
                 alert("Some error occured.");
             }
@@ -51,7 +55,12 @@ const UpdateEmployee = () => {
                 <TextField id="outlined-basic" label="Job Title" variant="outlined" value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} />
                 <TextField id="outlined-basic" label="Department Name" variant="outlined" value={departmentName} onChange={(event) => setDepartmentName(event.target.value)} />
             </fieldset>
+
             <Button type="submit" variant="contained">Submit</Button>
+
+            <Collapse in={open}>
+                <Alert onClick={() => {setOpen(false);}}>Employee updated successfuly!</Alert>
+            </Collapse>
         </Box>
     )
 }

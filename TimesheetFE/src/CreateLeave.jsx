@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
+import Collapse from '@mui/material/Collapse';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -16,6 +17,8 @@ const CreateLeave = () => {
     const [leaveStartDate, setLeaveStartDate] = useState(dayjs("2023-12-07"));
     const [leaveEndDate, setLeaveEndDate] = useState(dayjs("2023-12-07"));
     const [leaveStatus, setLeaveStatus] = useState(0);
+
+    const [open, setOpen] = useState(false);
 
     const LeaveStatus = {
         Approved : 0, 
@@ -47,6 +50,7 @@ const CreateLeave = () => {
                 setLeaveStartDate("");
                 setLeaveEndDate("");
                 setLeaveStatus("");
+                setOpen(true);
             } 
             else {
                 var err = "";
@@ -87,6 +91,10 @@ const CreateLeave = () => {
                 </Select>
             </fieldset>
             <Button type="submit" variant="contained">Submit</Button>
+
+            <Collapse in={open}>
+                <Alert onClick={() => {setOpen(false);}}>Leave added successfuly!</Alert>
+            </Collapse>
 
             {/* {error && 
             <Stack sx={{ width: '100%' }} spacing={2}>

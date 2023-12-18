@@ -47,6 +47,22 @@ namespace Timesheet.Controller
             return Ok(result);
         }
 
+        [HttpPut]
+        [Route("~/api/[controller]/updateLeave")]
+        public async Task<ActionResult<EmployeeLeave>> UpdateLeave(EmployeeLeave leave)
+        {
+
+            if (leave.LeaveId < 0)
+            {
+                return BadRequest();
+            }
+
+            var result = await _processStorage.UpdateLeave(leave);
+
+            return Ok(result);
+        }
+
+
         [HttpPost]
         [Route("~/api/[controller]/deleteAll")]
         public async Task<ActionResult> DeleteAllLeaves()
@@ -54,5 +70,14 @@ namespace Timesheet.Controller
             await _processStorage.DeleteAllLeaves();
             return Ok();
         }
+
+        [HttpDelete]
+        [Route("~/api/[controller]/deleteLeave")]
+        public async Task<ActionResult> DeleteLeave(int id)
+        {
+            await _processStorage.DeleteLeave(id);
+            return Ok();
+        }
+
     }
 }

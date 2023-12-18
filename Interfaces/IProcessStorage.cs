@@ -18,6 +18,10 @@
 
         Task<EmployeeLeave> AddLeave(EmployeeLeave leave);
 
+        Task<EmployeeLeave> UpdateLeave(EmployeeLeave leave);
+
         Task DeleteAllLeaves();
+
+        Task DeleteLeave(int id);
     }
 }

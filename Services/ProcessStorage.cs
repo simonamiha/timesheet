@@ -94,9 +94,45 @@ namespace Timesheet.Services
             return newLeave.Entity;
         }
 
+        public async Task<EmployeeLeave> UpdateLeave(EmployeeLeave leave)
+        {
+            _employeeContext.Entry(leave).State = EntityState.Modified;
+
+            try
+            {
+                await _employeeContext.SaveChangesAsync();
+            }
+
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_employeeContext.Leaves.Any(p => p.LeaveId == leave.LeaveId))
+                {
+                    return null;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return leave;
+        }
+
         public async Task DeleteAllLeaves()
         {
             await _employeeContext.Leaves.ExecuteDeleteAsync();
+            await _employeeContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteLeave(int id)
+        {
+            var deletedLeave = await _employeeContext.Leaves.FirstOrDefaultAsync(x => x.LeaveId == id);
+
+            if (deletedLeave != null)
+            {
+                _employeeContext.Leaves.Remove(deletedLeave);
+            }
+
             await _employeeContext.SaveChangesAsync();
         }
     }

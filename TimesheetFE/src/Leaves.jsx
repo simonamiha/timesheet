@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { DataGrid } from '@mui/x-data-grid';
 
 const LeavesTable = () => {
 
@@ -19,43 +20,26 @@ const LeavesTable = () => {
       );
   }, []);
 
+  const colums = [
+    {field: "leaveId", headerName: "Leave ID"},
+    {field: "employeeId", headerName: "Employee ID"},
+    {field: "leaveStartDate", headerName: "Start Date"},
+    {field: "leaveEndDate", headerName: "End Date"},
+    {field: "leaveStatus", headerName: "Leave Status"},
+  ]
+
   return (
-    <div>
-      <h2>Leaves Data</h2>
-      <table className='styled-table'>
-        <thead>
-          <tr>
-            <th>Leave Id</th>
-            <th>Employee Id</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {leaves.map(lv => (
-            <tr key={lv.leaveId} className='active-row'>
-              <td>{lv.leaveId}</td>
-              <td>{lv.employeeId}</td>
-              <td>{lv.leaveStartDate}</td>
-              <td>{lv.leaveEndDate}</td>
-              <td>{lv.leaveStatus}</td>
-              <td>
-                <IconButton aria-label="edit">
-                  <EditIcon />
-                </IconButton>
-              </td>
-              <td>
-                <IconButton aria-label="delete">
-                  <DeleteIcon />
-                </IconButton>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+      <DataGrid
+        rows={leaves}
+        columns={colums}
+        getRowId={(row) => row.leaveId}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 10 },
+          },
+        }}
+        pageSizeOptions={[10]}
+      />
   );
 }
 

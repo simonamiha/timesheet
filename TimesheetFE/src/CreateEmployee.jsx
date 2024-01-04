@@ -35,14 +35,14 @@ const CreateEmployee = () => {
                 setJobTitle("");
                 setDepartmentName("");
                 setOpen(true);
-            } 
+            }
             else {
                 var err = "";
-                for (var i = 0; i < data.length; i++)
-                {   err = err + "\r\n" + data[i].errorMessage;
-                };
+                for (var i = 0; i < data.length; i++) {
+                    err = err + "\r\n" + data[i].errorMessage;
+                }
             }
-        setError(err);
+            setError(err);
 
         } catch (error) {
             console.log(error);
@@ -55,21 +55,41 @@ const CreateEmployee = () => {
             autoComplete="off"
         >
             <fieldset>
-                <TextField id="outlined-basic" label="Last Name" variant="outlined" value={lastName} onChange={(event) => setLastName(event.target.value)} />
-                <TextField id="outlined-basic" label="First Name" variant="outlined" value={firstName} onChange={(event) => setFirstName(event.target.value)} />
-                <TextField id="outlined-basic" label="Job Title" variant="outlined" value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} />
-                <TextField id="outlined-basic" label="Department Name" variant="outlined" value={departmentName} onChange={(event) => setDepartmentName(event.target.value)} />
+                <TextField
+                    id="outlined-basic"
+                    label="Last Name" 
+                    variant="outlined"
+                    value={lastName}
+                    onChange={(event) => setLastName(event.target.value)} />
+                <TextField 
+                    id="outlined-basic" 
+                    label="First Name" 
+                    variant="outlined" 
+                    value={firstName} 
+                    onChange={(event) => setFirstName(event.target.value)} />
+                <TextField 
+                    id="outlined-basic" 
+                    label="Job Title" 
+                    variant="outlined" 
+                    value={jobTitle} 
+                    onChange={(event) => setJobTitle(event.target.value)} />
+                <TextField 
+                    id="outlined-basic" 
+                    label="Department Name" 
+                    variant="outlined" 
+                    value={departmentName} 
+                    onChange={(event) => setDepartmentName(event.target.value)} />
             </fieldset>
             <Button type="submit" variant="contained">Submit</Button>
 
             <Collapse in={open}>
-                <Alert onClick={() => {setOpen(false);}}>Employee created successfuly!</Alert>
+                <Alert onClick={() => { setOpen(false); }}>Employee created successfuly!</Alert>
             </Collapse>
 
-            {error && 
-            <Stack sx={{ width: '100%' }} spacing={2}>
-                <Alert severity="error">{error}</Alert>
-            </Stack>}
+            {error &&
+                <Stack sx={{ width: '100%' }} spacing={2}>
+                    <Alert severity="error">{error}</Alert>
+                </Stack>}
         </Box>
     )
 }

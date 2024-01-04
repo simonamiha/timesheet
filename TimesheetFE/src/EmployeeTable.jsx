@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+import { DataGrid } from '@mui/x-data-grid';
 
 class EmployeeTable extends React.Component {
   constructor(props) {

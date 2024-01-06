@@ -6,8 +6,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { DataGrid } from '@mui/x-data-grid';
 import Edit from '@mui/icons-material/Edit';
+import CreateLeave from "./CreateLeave";
 
 const LeavesTable = () => {
+
+  const [show, setShow] = useState(false);
 
   const [leaves, setLeaves] = useState([]);
 
@@ -32,13 +35,13 @@ const LeavesTable = () => {
     renderCell: (params) => {
       const onClick = (e) => {
 
-        //return alert(JSON.stringify(params.leaves.leaveId));
-        console.log(params);
-        return alert(JSON.stringify(params.row.leaveId));
+        //return alert(JSON.stringify(params.row.leaveId));
+        setShow(true);
+        //return ({show && <CreateLeave />});
 
     };
 
-    return <EditIcon onClick={onClick}></EditIcon>
+    //return <EditIcon onClick={onClick}></EditIcon>
   }}
   ]
 

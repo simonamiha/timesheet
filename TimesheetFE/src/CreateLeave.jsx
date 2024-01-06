@@ -11,6 +11,10 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const CreateLeave = () => {
     const [employeeId, setEmployeeId] = useState("");
@@ -20,11 +24,28 @@ const CreateLeave = () => {
 
     const [open, setOpen] = useState(false);
 
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpenDialog(true);
+      };
+
+    const handleClose = () => {
+        setOpenDialog(false);
+    };
+
+    const customStyle ={
+        menu: (base) => ({
+            ...base,
+            zIndex: 5,
+        }),
+    };
+
     const LeaveStatus = {
-        Approved : 0, 
-        Rejected : 1,
-        Pending : 2,
-        Cancelled : 3
+        Approved: 0,
+        Rejected: 1,
+        Pending: 2,
+        Cancelled: 3
     }
 
     const [error, setError] = useState(null);
@@ -51,14 +72,14 @@ const CreateLeave = () => {
                 setLeaveEndDate("");
                 setLeaveStatus("");
                 setOpen(true);
-            } 
+            }
             else {
                 var err = "";
-                for (var i = 0; i < data.length; i++)
-                {   err = err + "\r\n" + data[i].errorMessage;
+                for (var i = 0; i < data.length; i++) {
+                    err = err + "\r\n" + data[i].errorMessage;
                 };
             }
-        setError(err);
+            setError(err);
 
         } catch (error) {
             console.log(error);
@@ -66,42 +87,55 @@ const CreateLeave = () => {
     };
 
     return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Box component="form" onSubmit={handleSubmit} sx={{ '& > :not(style)': { m: 1, width: '25ch' }, }}
-            noValidate
-            autoComplete="off"
-        >
-            <fieldset>
-                <TextField id="outlined-basic" label="Employee Id" variant="outlined" value={employeeId} onChange={(event) => setEmployeeId(event.target.value)} />
-                <DatePicker
-                    value={leaveStartDate}
-                    format="YYYY/MM/DD"
-                    onChange={(newValue) => setLeaveStartDate(newValue)}
-                />
-                <DatePicker
-                    value={leaveEndDate}
-                    format="YYYY/MM/DD"
-                    onChange={(newValue) => setLeaveEndDate(newValue)}
-                />
-                <Select variant="outlined" onChange={(_, newValue) => setLeaveStatus(Number(newValue))}>
-                    <Option value={LeaveStatus.Approved}>Approved</Option>
-                    <Option value={LeaveStatus.Rejected}>Rejected</Option>
-                    <Option value={LeaveStatus.Pending}>Pending</Option>
-                    <Option value={LeaveStatus.Cancelled}>Cancelled</Option>
-                </Select>
-            </fieldset>
-            <Button type="submit" variant="contained">Submit</Button>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <div>
+            <Button variant="outlined" onClick={handleClickOpen}>
+            Create New Leave
+            </Button>
+            <Dialog open={openDialog} onClose={handleClose}>
+                <DialogTitle>Create New Leave</DialogTitle>
+                <DialogContent>
+                    <Box 
+                    component="form" onSubmit={handleSubmit} id="form"
+                    sx={{ '& > :not(style)': { m: 1, width: '25ch' }, }}
+                        noValidate
+                        autoComplete="off"
+                    >
+                            <TextField id="outlined-basic" label="Employee Id" variant="outlined" value={employeeId} onChange={(event) => setEmployeeId(event.target.value)} />
+                            <DatePicker
+                                value={leaveStartDate}
+                                format="YYYY/MM/DD"
+                                onChange={(newValue) => setLeaveStartDate(newValue)}
+                            />
+                            <DatePicker
+                                value={leaveEndDate}
+                                format="YYYY/MM/DD"
+                                onChange={(newValue) => setLeaveEndDate(newValue)}
+                            />
+                            <Select styles={customStyle} variant="outlined" onChange={(_, newValue) => setLeaveStatus(Number(newValue))}>
+                                <Option value={LeaveStatus.Approved}>Approved</Option>
+                                <Option value={LeaveStatus.Rejected}>Rejected</Option>
+                                <Option value={LeaveStatus.Pending}>Pending</Option>
+                                <Option value={LeaveStatus.Cancelled}>Cancelled</Option>
+                            </Select>
 
-            <Collapse in={open}>
-                <Alert onClick={() => {setOpen(false);}}>Leave added successfuly!</Alert>
-            </Collapse>
+                        <Collapse in={open}>
+                            <Alert onClick={() => { setOpen(false); }}>Leave added successfuly!</Alert>
+                        </Collapse>
 
-            {/* {error && 
+                        {/* {error && 
             <Stack sx={{ width: '100%' }} spacing={2}>
                 <Alert severity="error">{error}</Alert>
             </Stack>} */}
-        </Box>
-    </LocalizationProvider>
+                    </Box>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button type="submit" variant="contained" form="form">Submit</Button>
+                </DialogActions>
+            </Dialog>
+            </div>
+        </LocalizationProvider>
     )
 }
 

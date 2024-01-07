@@ -6,10 +6,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { DataGrid } from '@mui/x-data-grid';
 import Edit from '@mui/icons-material/Edit';
-import CreateLeave from "./CreateLeave";
+import Box from '@mui/material/Box';
+import CreateLeave from './CreateLeave';
+import UpdateLeave from './UpdateLeave';
+
 
 const LeavesTable = () => {
-
+ 
   const [show, setShow] = useState(false);
 
   const [leaves, setLeaves] = useState([]);
@@ -25,27 +28,28 @@ const LeavesTable = () => {
   }, []);
 
   const colums = [
-    {field: "leaveId", headerName: "Leave ID"},
-    {field: "employeeId", headerName: "Employee ID"},
-    {field: "leaveStartDate", headerName: "Start Date"},
-    {field: "leaveEndDate", headerName: "End Date"},
-    {field: "leaveStatus", headerName: "Leave Status"},
-    {field: "edit",
-    headerName: "Edit",
-    renderCell: (params) => {
-      const onClick = (e) => {
+    { field: "leaveId", headerName: "Leave ID" },
+    { field: "employeeId", headerName: "Employee ID" },
+    { field: "leaveStartDate", headerName: "Start Date" },
+    { field: "leaveEndDate", headerName: "End Date" },
+    { field: "leaveStatus", headerName: "Leave Status" },
+    {
+      field: "edit",
+      headerName: "Edit",
+      renderCell: (params) => {
+        const onClick = (e) => {
 
-        //return alert(JSON.stringify(params.row.leaveId));
-        setShow(true);
-        //return ({show && <CreateLeave />});
+          //return setLeaveId(params.row.leaveId);
 
-    };
-
-    //return <EditIcon onClick={onClick}></EditIcon>
-  }}
+        };
+        return <UpdateLeave props={{leaveId: params.row.leaveId, employeeId: params.row.employeeId}}/>;
+        //return <EditIcon onClick={onClick}></EditIcon>
+      }
+    }
   ]
 
   return (
+    <Box>
       <DataGrid
         rows={leaves}
         columns={colums}
@@ -57,6 +61,8 @@ const LeavesTable = () => {
         }}
         pageSizeOptions={[10]}
       />
+      <CreateLeave />
+    </Box>
   );
 }
 

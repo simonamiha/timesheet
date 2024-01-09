@@ -19,9 +19,9 @@ import EditIcon from '@mui/icons-material/Edit';
 const UpdateLeave = ({props}) => {
     const [leaveId, setLeaveId] = useState(props.leaveId);
     const [employeeId, setEmployeeId] = useState(props.employeeId);
-    const [leaveStartDate, setLeaveStartDate] = useState(dayjs("2023-12-07"));
-    const [leaveEndDate, setLeaveEndDate] = useState(dayjs("2023-12-07"));
-    const [leaveStatus, setLeaveStatus] = useState(0);
+    const [leaveStartDate, setLeaveStartDate] = useState(dayjs(props.leaveStartDate));
+    const [leaveEndDate, setLeaveEndDate] = useState(dayjs(props.leaveEndDate));
+    const [leaveStatus, setLeaveStatus] = useState(props.leaveStatus);
     const [open, setOpen] = useState(false);
 
     const [openDialog, setOpenDialog] = useState(false);

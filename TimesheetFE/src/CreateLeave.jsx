@@ -9,8 +9,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
-import Select from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -97,26 +97,28 @@ const CreateLeave = () => {
                 <DialogContent>
                     <Box 
                     component="form" onSubmit={handleSubmit} id="form"
-                    sx={{ '& > :not(style)': { m: 1, width: '25ch' }, }}
+                        sx={{ display: 'flex', flexWrap: "wrap", alignItems: 'flex-start', flexDirection: 'column' }}
                         noValidate
                         autoComplete="off"
                     >
-                            <TextField id="outlined-basic" label="Employee Id" variant="outlined" value={employeeId} onChange={(event) => setEmployeeId(event.target.value)} />
+                            <TextField sx={{mb: 1}} id="outlined-basic" label="Employee Id" variant="outlined" value={employeeId} onChange={(event) => setEmployeeId(event.target.value)} />
                             <DatePicker
                                 value={leaveStartDate}
                                 format="YYYY/MM/DD"
                                 onChange={(newValue) => setLeaveStartDate(newValue)}
+                                sx={{mb: 1}}
                             />
                             <DatePicker
                                 value={leaveEndDate}
                                 format="YYYY/MM/DD"
                                 onChange={(newValue) => setLeaveEndDate(newValue)}
+                                sx={{mb: 1}}
                             />
-                            <Select styles={customStyle} variant="outlined" onChange={(_, newValue) => setLeaveStatus(Number(newValue))}>
-                                <Option value={LeaveStatus.Approved}>Approved</Option>
-                                <Option value={LeaveStatus.Rejected}>Rejected</Option>
-                                <Option value={LeaveStatus.Pending}>Pending</Option>
-                                <Option value={LeaveStatus.Cancelled}>Cancelled</Option>
+                            <Select sx={{width: 120}} variant="outlined" onChange={(_, newValue) => setLeaveStatus(Number(newValue))}>
+                                <MenuItem value={LeaveStatus.Approved}>Approved</MenuItem>
+                                <MenuItem value={LeaveStatus.Rejected}>Rejected</MenuItem>
+                                <MenuItem value={LeaveStatus.Pending}>Pending</MenuItem>
+                                <MenuItem value={LeaveStatus.Cancelled}>Cancelled</MenuItem>
                             </Select>
 
                         <Collapse in={open}>

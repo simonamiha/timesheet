@@ -8,8 +8,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
-import Select from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -100,10 +100,10 @@ const UpdateLeave = ({props}) => {
                                 onChange={(newValue) => setLeaveEndDate(newValue)}
                             />
                             <Select variant="outlined" onChange={(_, newValue) => setLeaveStatus(Number(newValue))}>
-                                <Option value={LeaveStatus.Approved}>Approved</Option>
-                                <Option value={LeaveStatus.Rejected}>Rejected</Option>
-                                <Option value={LeaveStatus.Pending}>Pending</Option>
-                                <Option value={LeaveStatus.Cancelled}>Cancelled</Option>
+                                <MenuItem value={LeaveStatus.Approved}>Approved</MenuItem>
+                                <MenuItem value={LeaveStatus.Rejected}>Rejected</MenuItem>
+                                <MenuItem value={LeaveStatus.Pending}>Pending</MenuItem>
+                                <MenuItem value={LeaveStatus.Cancelled}>Cancelled</MenuItem>
                             </Select>
 
                         <Collapse in={open}>

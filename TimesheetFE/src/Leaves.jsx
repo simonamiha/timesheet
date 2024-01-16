@@ -63,7 +63,8 @@ const LeavesTable = () => {
 
   return (
     <Box>
-      <DataGrid
+      <CreateLeave />
+      <DataGrid sx={{ m: 2 }}
         rows={leaves}
         columns={colums}
         getRowId={(row) => row.leaveId}
@@ -74,7 +75,6 @@ const LeavesTable = () => {
         }}
         pageSizeOptions={[10]}
       />
-      <CreateLeave />
     </Box>
   );
 }

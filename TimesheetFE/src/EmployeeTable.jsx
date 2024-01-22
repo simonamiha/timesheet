@@ -1,56 +1,77 @@
 import React from 'react'
 import './App.css'
+import { useState, useEffect } from "react";
 import { DataGrid } from '@mui/x-data-grid';
+import Box from '@mui/material/Box';
+import CreateEmployee from './CreateEmployee';
 
-class EmployeeTable extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      employees: []
-    };
-  }
+const EmployeeTable = () => {
 
-  componentDidMount() {
+  const [employees, setEmployees] = useState([]);
+
+  useEffect(() => {
     fetch("https://localhost:7209/api/employee/getall")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            employees: result
-          });
-        }
-      );
-  }
-
-  render() {
-    return (
-      <div>
-        <h2>Employee Data</h2>
-        <table className='styled-table'>
-          <thead>
-            <tr>
-              <th>Employee Id</th>
-              <th>Last Name</th>
-              <th>First Name</th>
-              <th>Job Title</th>
-              <th>Department Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.employees.map(emp => (
-              <tr key={emp.employeeId} className='active-row'>
-                <td>{emp.employeeId}</td>
-                <td>{emp.lastName}</td>
-                <td>{emp.firstName}</td>
-                <td>{emp.jobTitle}</td>
-                <td>{emp.departmentName}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    .then(res => res.json())
+    .then(
+      (result) => {
+        setEmployees(result);
+      }
     );
-  }
+  }, []);
+
+  // function handleState(employees){
+  //   setEmployees(employees);
+  // }
+
+  const colums = [
+    { field: "employeeId", headerName: "Employee ID" },
+    { field: "firstName", headerName: "First Name" },
+    { field: "lastName", headerName: "Last Name" },
+    { field: "jobTitle", headerName: "Job Title" },
+    { field: "departmentName", headerName: "Department" },
+    // {
+    //   field: "edit",
+    //   headerName: "Edit",
+    //   renderCell: (params) => {
+
+    //     return <UpdateLeave 
+    //     props={{
+    //       leaveId: params.row.leaveId, 
+    //       employeeId: params.row.employeeId, 
+    //       leaveStartDate: params.row.leaveStartDate, 
+    //       leaveEndDate: params.row.leaveEndDate,
+    //       leaveStatus: params.row.leaveStatus}}/>;
+    //   }
+    // },
+    // {
+    //   field: "delete",
+    //   headerName: "Delete",
+    //   renderCell: (params) => {
+        
+    //     return <DeleteLeave 
+    //     change={handleState}
+    //     props={{
+    //       leaveId: params.row.leaveId }}/>;
+    //   }
+    // }
+  ]
+
+  return (
+    <Box>
+      <CreateEmployee />
+      <DataGrid sx={{ m: 2 }}
+        rows={employees}
+        columns={colums}
+        getRowId={(row) => row.employeeId}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 10 },
+          },
+        }}
+        pageSizeOptions={[10]}
+      />
+    </Box>
+  );
 }
 
 export default EmployeeTable

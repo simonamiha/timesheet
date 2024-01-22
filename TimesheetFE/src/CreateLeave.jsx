@@ -34,13 +34,6 @@ const CreateLeave = () => {
         setOpenDialog(false);
     };
 
-    const customStyle ={
-        menu: (base) => ({
-            ...base,
-            zIndex: 5,
-        }),
-    };
-
     const LeaveStatus = {
         Approved: 0,
         Rejected: 1,
@@ -114,7 +107,7 @@ const CreateLeave = () => {
                                 onChange={(newValue) => setLeaveEndDate(newValue)}
                                 sx={{mb: 1}}
                             />
-                            <Select sx={{width: 120}} variant="outlined" onChange={(_, newValue) => setLeaveStatus(Number(newValue))}>
+                            <Select sx={{width: 120}} variant="outlined" value={LeaveStatus} onChange={(_, newValue) => setLeaveStatus(newValue.props.value)}>
                                 <MenuItem value={LeaveStatus.Approved}>Approved</MenuItem>
                                 <MenuItem value={LeaveStatus.Rejected}>Rejected</MenuItem>
                                 <MenuItem value={LeaveStatus.Pending}>Pending</MenuItem>

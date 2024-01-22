@@ -15,6 +15,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import EditIcon from '@mui/icons-material/Edit';
+import LeavesTable from "./Leaves";
 
 const UpdateLeave = ({props}) => {
     const [leaveId, setLeaveId] = useState(props.leaveId);
@@ -87,8 +88,8 @@ const UpdateLeave = ({props}) => {
                         noValidate
                         autoComplete="off"
                     >       
-                            <TextField id="outlined-basic" label="Leave Id" variant="outlined" value={leaveId} onChange={(event) => setLeaveId(event.target.value)} />
-                            <TextField id="outlined-basic" label="Employee Id" variant="outlined" value={employeeId} onChange={(event) => setEmployeeId(event.target.value)} />
+                            <TextField disabled id="outlined-disabled" label="Leave Id" variant="outlined" value={leaveId} onChange={(event) => setLeaveId(event.target.value)} />
+                            <TextField disabled id="outlined-disabled" label="Employee Id" variant="outlined" value={employeeId} onChange={(event) => setEmployeeId(event.target.value)} />
                             <DatePicker
                                 value={leaveStartDate}
                                 format="YYYY/MM/DD"
@@ -99,7 +100,7 @@ const UpdateLeave = ({props}) => {
                                 format="YYYY/MM/DD"
                                 onChange={(newValue) => setLeaveEndDate(newValue)}
                             />
-                            <Select variant="outlined" onChange={(_, newValue) => setLeaveStatus(Number(newValue))}>
+                            <Select variant="outlined" value={LeaveStatus} onChange={(_, newValue) => setLeaveStatus(newValue.props.value)}>
                                 <MenuItem value={LeaveStatus.Approved}>Approved</MenuItem>
                                 <MenuItem value={LeaveStatus.Rejected}>Rejected</MenuItem>
                                 <MenuItem value={LeaveStatus.Pending}>Pending</MenuItem>

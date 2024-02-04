@@ -13,7 +13,6 @@ const Navbar = () => {
         <ul className='list'>
           <li className='items'> <Link to="/EmployeeTable">Employees</Link> </li>
           <li className='items'> <Link to="/FindEmployee">Find Employee</Link></li>
-          <li className='items'> <Link to="/UpdateEmployee">Update Employee</Link></li>
           <li className='items'> <Link to="/Leaves">Leaves</Link></li>
         </ul>
       </nav>
@@ -21,7 +20,6 @@ const Navbar = () => {
       <Routes>
         <Route path="/EmployeeTable" element={<EmployeeTable />}/>
         <Route path="/FindEmployee" element={<FindEmployee />}/>
-        <Route path="/UpdateEmployee" element={<UpdateEmployee />}/>
         <Route path="/Leaves" element={<LeavesTable />}/>
       </Routes>
     </Router>

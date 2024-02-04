@@ -108,7 +108,7 @@ const UpdateLeave = ({props}) => {
                             </Select>
 
                         <Collapse in={open}>
-                            <Alert onClick={() => { setOpen(false); }}>Leave added successfuly!</Alert>
+                            <Alert onClick={() => { setOpen(false); }}>Leave updated successfuly!</Alert>
                         </Collapse>
                     </Box>
                 </DialogContent>

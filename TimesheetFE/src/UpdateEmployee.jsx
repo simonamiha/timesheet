@@ -4,14 +4,29 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import Collapse from '@mui/material/Collapse';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import EditIcon from '@mui/icons-material/Edit';
 
-const UpdateEmployee = () => {
-    const [employeeId, setEmployeeId] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [jobTitle, setJobTitle] = useState("");
-    const [departmentName, setDepartmentName] = useState("");
+const UpdateEmployee = ({props}) => {
+    const [employeeId, setEmployeeId] = useState(props.employeeId);
+    const [lastName, setLastName] = useState(props.lastName);
+    const [firstName, setFirstName] = useState(props.firstName);
+    const [jobTitle, setJobTitle] = useState(props.jobTitle);
+    const [departmentName, setDepartmentName] = useState(props.departmentName);
     const [open, setOpen] = useState(false);
+
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpenDialog(true);
+    };
+
+    const handleClose = () => {
+        setOpenDialog(false);
+    };
 
     const handleSubmit = async event => {
         event.preventDefault();
@@ -44,24 +59,33 @@ const UpdateEmployee = () => {
     };
 
     return (
-        <Box component="form" onSubmit={handleSubmit} sx={{ '& > :not(style)': { m: 1, width: '25ch' }, }}
-            noValidate
-            autoComplete="off"
-        >
-            <fieldset>
-                <TextField id="outlined-basic" label="Emploee Id" variant="outlined" value={employeeId} onChange={(event) => setEmployeeId(event.target.value)} />
-                <TextField id="outlined-basic" label="Last Name" variant="outlined" value={lastName} onChange={(event) => setLastName(event.target.value)} />
-                <TextField id="outlined-basic" label="First Name" variant="outlined" value={firstName} onChange={(event) => setFirstName(event.target.value)} />
-                <TextField id="outlined-basic" label="Job Title" variant="outlined" value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} />
-                <TextField id="outlined-basic" label="Department Name" variant="outlined" value={departmentName} onChange={(event) => setDepartmentName(event.target.value)} />
-            </fieldset>
+        <div>
+            <EditIcon onClick={handleClickOpen}>
+            </EditIcon>
+            <Dialog open={openDialog} onClose={handleClose}>
+                <DialogTitle>Edit Employee Details</DialogTitle>
+                <DialogContent>
+                    <Box component="form" onSubmit={handleSubmit} sx={{ '& > :not(style)': { m: 1, width: '25ch' }, }} id="form"
+                        noValidate
+                        autoComplete="off"
+                    >
+                            <TextField disabled id="outlined-disabled" label="Emploee Id" variant="outlined" value={employeeId} onChange={(event) => setEmployeeId(event.target.value)} />
+                            <TextField id="outlined-basic" label="Last Name" variant="outlined" value={lastName} onChange={(event) => setLastName(event.target.value)} />
+                            <TextField id="outlined-basic" label="First Name" variant="outlined" value={firstName} onChange={(event) => setFirstName(event.target.value)} />
+                            <TextField id="outlined-basic" label="Job Title" variant="outlined" value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} />
+                            <TextField id="outlined-basic" label="Department Name" variant="outlined" value={departmentName} onChange={(event) => setDepartmentName(event.target.value)} />
 
-            <Button type="submit" variant="contained">Submit</Button>
-
-            <Collapse in={open}>
-                <Alert onClick={() => {setOpen(false);}}>Employee updated successfuly!</Alert>
-            </Collapse>
-        </Box>
+                        <Collapse in={open}>
+                            <Alert onClick={() => { setOpen(false); }}>Employee updated successfuly!</Alert>
+                        </Collapse>
+                    </Box>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button type="submit" variant="contained" form="form">Submit</Button>
+                </DialogActions>
+            </Dialog>
+        </div>
     )
 }
 

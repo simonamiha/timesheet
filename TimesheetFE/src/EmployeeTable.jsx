@@ -6,22 +6,25 @@ import Box from '@mui/material/Box';
 import CreateEmployee from './CreateEmployee';
 import UpdateEmployee from './UpdateEmployee';
 import DeleteEmployee from './DeleteEmployee';
+import { useNavigate } from "react-router-dom";
+import Employee from './Employee';
 
 const EmployeeTable = () => {
 
   const [employees, setEmployees] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("https://localhost:7209/api/employee/getall")
-    .then(res => res.json())
-    .then(
-      (result) => {
-        setEmployees(result);
-      }
-    );
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setEmployees(result);
+        }
+      );
   }, []);
 
-  function handleState(employees){
+  function handleState(employees) {
     setEmployees(employees);
   }
 
@@ -32,28 +35,39 @@ const EmployeeTable = () => {
     { field: "jobTitle", headerName: "Job Title" },
     { field: "departmentName", headerName: "Department" },
     {
+      field: "view",
+      headerName: "View",
+      renderCell: (params) => {
+
+        return <Employee
+        props = {{id : params.row.employeeId}}/>;
+      }
+    },
+    {
       field: "edit",
       headerName: "Edit",
       renderCell: (params) => {
 
-        return <UpdateEmployee 
-        props={{
-          employeeId: params.row.employeeId, 
-          firstName: params.row.firstName, 
-          lastName: params.row.lastName,
-          jobTitle: params.row.jobTitle,
-          departmentName: params.row.departmentName}}/>;
+        return <UpdateEmployee
+          props={{
+            employeeId: params.row.employeeId,
+            firstName: params.row.firstName,
+            lastName: params.row.lastName,
+            jobTitle: params.row.jobTitle,
+            departmentName: params.row.departmentName
+          }} />;
       }
     },
     {
       field: "delete",
       headerName: "Delete",
       renderCell: (params) => {
-        
-        return <DeleteEmployee 
-        change={handleState}
-        props={{
-          employeeId: params.row.employeeId }}/>;
+
+        return <DeleteEmployee
+          change={handleState}
+          props={{
+            employeeId: params.row.employeeId
+          }} />;
       }
     }
   ]

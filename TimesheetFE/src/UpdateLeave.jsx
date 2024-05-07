@@ -23,6 +23,7 @@ const UpdateLeave = ({props}) => {
     const [leaveStartDate, setLeaveStartDate] = useState(dayjs(props.leaveStartDate));
     const [leaveEndDate, setLeaveEndDate] = useState(dayjs(props.leaveEndDate));
     const [leaveStatus, setLeaveStatus] = useState(props.leaveStatus);
+    const [leaveType, setLeaveType] = useState(props.leaveType);
     const [open, setOpen] = useState(false);
 
     const [openDialog, setOpenDialog] = useState(false);
@@ -42,6 +43,13 @@ const UpdateLeave = ({props}) => {
         Cancelled: 3
     }
 
+    const LeaveType = {
+        WorkingDay: 0,
+        AnnualLeave: 1,
+        SpecialLeave: 2,
+        Delegation: 3
+    }
+
     const handleSubmit = async event => {
         event.preventDefault();
         var finalStartDate = leaveStartDate.format("YYYY-MM-DD");
@@ -56,6 +64,7 @@ const UpdateLeave = ({props}) => {
                     leaveStartDate: finalStartDate,
                     leaveEndDate: finalEndDate,
                     leaveStatus: leaveStatus,
+                    leaveType: leaveType,
                 }),
             });
             await res.json();
@@ -65,6 +74,7 @@ const UpdateLeave = ({props}) => {
                 setLeaveStartDate("");
                 setLeaveEndDate("");
                 setLeaveStatus("");
+                setLeaveType("");
                 setOpen(true);
             } else {
                 alert("Some error occured.");
@@ -105,6 +115,12 @@ const UpdateLeave = ({props}) => {
                                 <MenuItem value={LeaveStatus.Rejected}>Rejected</MenuItem>
                                 <MenuItem value={LeaveStatus.Pending}>Pending</MenuItem>
                                 <MenuItem value={LeaveStatus.Cancelled}>Cancelled</MenuItem>
+                            </Select>
+                            <Select variant="outlined" value={LeaveType} onChange={(_, newValue) => setLeaveType(newValue.props.value)}>
+                                <MenuItem value={LeaveType.WorkingDay}>Working Day</MenuItem>
+                                <MenuItem value={LeaveType.AnnualLeave}>Annual Leave</MenuItem>
+                                <MenuItem value={LeaveType.SpecialLeave}>Special Leave</MenuItem>
+                                <MenuItem value={LeaveType.Delegation}>Delegation</MenuItem>
                             </Select>
 
                         <Collapse in={open}>

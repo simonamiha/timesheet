@@ -34,6 +34,7 @@ const LeavesTable = () => {
     { field: "leaveStartDate", headerName: "Start Date" },
     { field: "leaveEndDate", headerName: "End Date" },
     { field: "leaveStatus", headerName: "Leave Status" },
+    { field: "leaveType", headerName: "Leave Type" },
     {
       field: "edit",
       headerName: "Edit",

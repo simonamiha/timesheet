@@ -24,11 +24,6 @@ const Employee = ({ props }) => {
     setOpenDialog(false);
   };
 
-  function avatarInitials(lastName,firstName)
-  {
-    return lastName.charAt(0) + firstName.charAt(0);
-  }
-
   useEffect(() => {
     if (!id) return;
 
@@ -57,7 +52,8 @@ const Employee = ({ props }) => {
             <Avatar
               alt={employee.lastName}
               sx={{ width: 60, height: 60 }}
-              children={avatarInitials(employee.lastName, employee.firstName)}/>
+              //children={employee.lastName.charAt(0) + employee.firstName.charAt(0)}
+              />
             <h2>{employee.lastName} {employee.firstName} ({employee.employeeId})</h2>
             <h3>Job Title: {employee.jobTitle}</h3>
             <h3>Department: {employee.departmentName}</h3>

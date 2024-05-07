@@ -15,6 +15,8 @@ namespace Timesheet
 
         public DateOnly LeaveEndDate { get; set; }
 
+        public LeaveType LeaveType { get; set; }
+
         public LeaveStatus LeaveStatus { get; set; }
 
         [JsonIgnore]

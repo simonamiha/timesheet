@@ -1,19 +1,16 @@
-import { useState } from 'react'
 import './App.css'
 import Navbar from './Navbar';
-import './Navbar.css'
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import Box from '@mui/material/Box';
 
 export default function App() {
 
-  const [query, setQuery] = useState("");
-
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div>
+      <Box sx={{ width: '100%' }}>
         <Navbar />
-      </div>
+        </Box>
     </LocalizationProvider>
   );
 }

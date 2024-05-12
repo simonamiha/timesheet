@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Timesheet;
 using Timesheet.Data;
 using Timesheet.Interfaces;
 using Timesheet.Services;
@@ -18,6 +20,11 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddDbContext<EmployeeContext>();
+
+//Add Identity
+builder.Services.AddIdentity<Employee, IdentityRole>()
+    .AddEntityFrameworkStores<EmployeeContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IProcessStorage, ProcessStorage>();
 

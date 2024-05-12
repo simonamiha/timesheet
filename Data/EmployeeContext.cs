@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Timesheet.Services;
 using Timesheet.Services.Comparers;
 
 namespace Timesheet.Data
 {
-    public class EmployeeContext : DbContext
+    public class EmployeeContext : IdentityDbContext<Employee>
     {
         public DbSet<Employee> Employees { get; set; } = null!;
 
@@ -31,6 +32,7 @@ namespace Timesheet.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Employee>()
                 .HasQueryFilter(x => x.IsDeleted == false);
         }

@@ -3,7 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheet", "Timesheet.csproj", "{52D367F0-F029-4837-964C-FA4D13A6821F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timesheet", "Timesheet.csproj", "{52D367F0-F029-4837-964C-FA4D13A6821F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Timesheet Tests", "Timesheet Tests", "{00679F4D-08BF-4254-A96B-F5586EA394C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheet.Test", "..\Timesheet.Test\Timesheet.Test.csproj", "{4B82B15B-AF7F-4643-9909-B8B7EC39F193}"
+	ProjectSection(ProjectDependencies) = postProject
+		{52D367F0-F029-4837-964C-FA4D13A6821F} = {52D367F0-F029-4837-964C-FA4D13A6821F}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +22,16 @@ Global
 		{52D367F0-F029-4837-964C-FA4D13A6821F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52D367F0-F029-4837-964C-FA4D13A6821F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52D367F0-F029-4837-964C-FA4D13A6821F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B82B15B-AF7F-4643-9909-B8B7EC39F193}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B82B15B-AF7F-4643-9909-B8B7EC39F193}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B82B15B-AF7F-4643-9909-B8B7EC39F193}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B82B15B-AF7F-4643-9909-B8B7EC39F193}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4B82B15B-AF7F-4643-9909-B8B7EC39F193} = {00679F4D-08BF-4254-A96B-F5586EA394C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0664FB7D-8EF6-4F3B-B5FC-264BD0963164}

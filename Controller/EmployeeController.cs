@@ -33,7 +33,7 @@ namespace Timesheet.Controller
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult<Employee>> GetEmployee(int id)
+        public async Task<ActionResult<Employee>> GetEmployee(string id)
         {
             var employee = await _processStorage.GetEmployee(id);
             if (employee == null)
@@ -73,7 +73,7 @@ namespace Timesheet.Controller
                 return BadRequest(validationResult.Errors);
             }
 
-            if (employee.EmployeeId < 0)
+            if (employee.Id == null || employee.Id == "")
             {
                 return BadRequest();
             }
@@ -93,7 +93,7 @@ namespace Timesheet.Controller
 
         [HttpDelete]
         [Route("deleteEmployee")]
-        public async Task<ActionResult> DeleteEmployee(int id)
+        public async Task<ActionResult> DeleteEmployee(string id)
         {
             await _processStorage.DeleteEmployee(id);
             return Ok();

@@ -25,6 +25,12 @@ builder.Services.AddDbContext<EmployeeContext>();
 builder.Services.AddIdentity<Employee, IdentityRole>()
     .AddEntityFrameworkStores<EmployeeContext>()
     .AddDefaultTokenProviders();
+//Add Authentication
+//builder.Services.AddAuthentication(options =>
+//{
+     
+//})
+
 
 builder.Services.AddScoped<IProcessStorage, ProcessStorage>();
 

@@ -15,7 +15,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import EditIcon from '@mui/icons-material/Edit';
-import LeavesTable from "./Leaves";
 
 const UpdateLeave = ({props}) => {
     const [leaveId, setLeaveId] = useState(props.leaveId);
@@ -60,7 +59,7 @@ const UpdateLeave = ({props}) => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     leaveId: leaveId,
-                    employeeId: employeeId,
+                    id: employeeId,
                     leaveStartDate: finalStartDate,
                     leaveEndDate: finalEndDate,
                     leaveStatus: leaveStatus,

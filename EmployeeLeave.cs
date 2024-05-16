@@ -9,7 +9,7 @@ namespace Timesheet
         [Key]
         public int LeaveId { get; set; }
 
-        public int EmployeeId { get; set; }
+        public string Id { get; set; }
 
         public DateOnly LeaveStartDate { get; set; }
 

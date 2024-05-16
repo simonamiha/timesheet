@@ -30,7 +30,7 @@ const LeavesTable = () => {
 
   const colums = [
     { field: "leaveId", headerName: "Leave ID" },
-    { field: "employeeId", headerName: "Employee ID" },
+    { field: "id", headerName: "Employee ID" },
     { field: "leaveStartDate", headerName: "Start Date" },
     { field: "leaveEndDate", headerName: "End Date" },
     { field: "leaveStatus", headerName: "Leave Status" },
@@ -43,7 +43,7 @@ const LeavesTable = () => {
         return <UpdateLeave 
         props={{
           leaveId: params.row.leaveId, 
-          employeeId: params.row.employeeId, 
+          employeeId: params.row.id, 
           leaveStartDate: params.row.leaveStartDate, 
           leaveEndDate: params.row.leaveEndDate,
           leaveStatus: params.row.leaveStatus}}/>;

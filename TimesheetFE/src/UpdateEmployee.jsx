@@ -35,7 +35,7 @@ const UpdateEmployee = ({props}) => {
                 method: "PUT",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    employeeId: employeeId,
+                    id: employeeId,
                     lastName: lastName,
                     firstName: firstName,
                     jobTitle: jobTitle,

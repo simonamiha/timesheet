@@ -33,6 +33,19 @@ namespace Timesheet.Controller
             return Ok(list);
         }
 
+        [HttpGet]
+        [Route("~/api/[controller]/getemployeeleaves")]
+        public async Task<ActionResult> GetEmployeeLeaves(string id)
+        {
+            var list = await _processStorage.GetEmployeeLeaves(id);
+
+            if (list == null)
+            {
+                return NotFound();
+            }
+            return Ok(list);
+        }
+
         [HttpPost]
         [Route("~/api/[controller]/addleave")]
         public async Task<ActionResult<EmployeeLeave>> AddLeave(EmployeeLeave leave)

@@ -1,5 +1,6 @@
 import EmployeeTable from './EmployeeTable';
 import LeavesTable from './Leaves';
+import Dashboard from './Dashboard';
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
@@ -51,13 +52,14 @@ function MyTabs() {
   // This means that if you have nested routes like:
   // users, users/new, users/edit.
   // Then the order should be ['users/add', 'users/edit', 'users'].
-  const routeMatch = useRouteMatch(['/EmployeeTable', '/Leaves']);
+  const routeMatch = useRouteMatch(['/EmployeeTable', '/Leaves', '/Dashboard']);
   const currentTab = routeMatch?.pattern?.path;
 
   return (
     <Tabs value={currentTab}>
       <Tab label="Employees" value="/EmployeeTable" to="/EmployeeTable" component={Link} />
       <Tab label="Leaves" value="/Leaves" to="/Leaves" component={Link} />
+      <Tab label="Dashboard" value="/Dashboard" to="/Dashboard" component={Link} />
     </Tabs>
   );
 }
@@ -70,6 +72,7 @@ export default function TabsRouter() {
         <Routes>
           <Route path="/EmployeeTable" element={<EmployeeTable />}/>
           <Route path="/Leaves" element={<LeavesTable />}/>
+          <Route path="/Dashboard" element={<Dashboard />}/>
         </Routes>
       </Box>
     </Router>

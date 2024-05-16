@@ -4,7 +4,7 @@
     {
         Task<List<Employee>> GetAllEmployees();
 
-        Task<Employee> GetEmployee(int id);
+        Task<Employee> GetEmployee(string id);
 
         Task DeleteAll();
 
@@ -12,9 +12,11 @@
 
         Task<Employee> UpdateEmployee(Employee employee);
 
-        Task DeleteEmployee(int id);
+        Task DeleteEmployee(string id);
         
         Task<List<EmployeeLeave>> GetAllLeaves();
+
+        Task<List<EmployeeLeave>> GetEmployeeLeaves(string id);
 
         Task<EmployeeLeave> AddLeave(EmployeeLeave leave);
 

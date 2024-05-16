@@ -31,9 +31,14 @@ namespace Timesheet.Services
             return await _employeeContext.Employees.ToListAsync();
         }
 
-        public async Task<Employee> GetEmployee(int id)
+        public async Task<Employee> GetEmployee(string id)
         {
-            return await _employeeContext.Employees.FirstOrDefaultAsync(x => x.EmployeeId == id);
+            return await _employeeContext.Employees.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<List<EmployeeLeave>> GetEmployeeLeaves(string id)
+        {
+            return await _employeeContext.Leaves.Where(x => x.Id == id).ToListAsync();
         }
 
         public async Task<Employee> UpdateEmployee(Employee employee)
@@ -47,7 +52,7 @@ namespace Timesheet.Services
 
             catch (DbUpdateConcurrencyException)
             {
-                if (!_employeeContext.Employees.Any(p => p.EmployeeId == employee.EmployeeId))
+                if (!_employeeContext.Employees.Any(p => p.Id == employee.Id))
                 {
                     return null;
                 }
@@ -60,9 +65,9 @@ namespace Timesheet.Services
             return employee;
         }
 
-        public async Task DeleteEmployee(int id)
+        public async Task DeleteEmployee(string id)
         {
-            var deletedEmployee = await _employeeContext.Employees.FirstOrDefaultAsync(x => x.EmployeeId == id);
+            var deletedEmployee = await _employeeContext.Employees.FirstOrDefaultAsync(x => x.Id == id);
 
             if (deletedEmployee != null)
             {
@@ -81,7 +86,7 @@ namespace Timesheet.Services
 
         public async Task<EmployeeLeave> AddLeave(EmployeeLeave leave)
         {
-            var check = await _employeeContext.Employees.Where(x => x.EmployeeId == leave.EmployeeId).SingleOrDefaultAsync();
+            var check = await _employeeContext.Employees.Where(x => x.Id == leave.Id).SingleOrDefaultAsync();
             if (check == null)
             {
                 return null;

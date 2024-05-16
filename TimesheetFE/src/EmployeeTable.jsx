@@ -29,7 +29,7 @@ const EmployeeTable = () => {
   }
 
   const colums = [
-    { field: "employeeId", headerName: "Employee ID" },
+    { field: "id", headerName: "Employee ID" },
     { field: "firstName", headerName: "First Name" },
     { field: "lastName", headerName: "Last Name" },
     { field: "jobTitle", headerName: "Job Title" },
@@ -40,7 +40,7 @@ const EmployeeTable = () => {
       renderCell: (params) => {
 
         return <Employee
-        props = {{id : params.row.employeeId}}/>;
+        props = {{id : params.row.id}}/>;
       }
     },
     {
@@ -50,7 +50,7 @@ const EmployeeTable = () => {
 
         return <UpdateEmployee
           props={{
-            employeeId: params.row.employeeId,
+            employeeId: params.row.id,
             firstName: params.row.firstName,
             lastName: params.row.lastName,
             jobTitle: params.row.jobTitle,
@@ -66,7 +66,7 @@ const EmployeeTable = () => {
         return <DeleteEmployee
           change={handleState}
           props={{
-            employeeId: params.row.employeeId
+            employeeId: params.row.id
           }} />;
       }
     }
@@ -78,7 +78,7 @@ const EmployeeTable = () => {
       <DataGrid sx={{ m: 2 }}
         rows={employees}
         columns={colums}
-        getRowId={(row) => row.employeeId}
+        getRowId={(row) => row.id}
         initialState={{
           pagination: {
             paginationModel: { page: 0, pageSize: 10 },

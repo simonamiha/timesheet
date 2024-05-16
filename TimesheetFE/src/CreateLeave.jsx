@@ -52,7 +52,7 @@ const CreateLeave = () => {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    employeeId: employeeId,
+                    id: employeeId,
                     leaveStartDate: finalStartDate,
                     leaveEndDate: finalEndDate,
                     leaveStatus: leaveStatus,

@@ -54,7 +54,7 @@ const Employee = ({ props }) => {
               sx={{ width: 60, height: 60 }}
               //children={employee.lastName.charAt(0) + employee.firstName.charAt(0)}
               />
-            <h2>{employee.lastName} {employee.firstName} ({employee.employeeId})</h2>
+            <h2>{employee.lastName} {employee.firstName} ({employee.id})</h2>
             <h3>Job Title: {employee.jobTitle}</h3>
             <h3>Department: {employee.departmentName}</h3>
           </Stack>

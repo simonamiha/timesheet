@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using Timesheet;
 using Timesheet.Data;
 using Timesheet.Interfaces;
@@ -25,11 +28,30 @@ builder.Services.AddDbContext<EmployeeContext>();
 builder.Services.AddIdentity<Employee, IdentityRole>()
     .AddEntityFrameworkStores<EmployeeContext>()
     .AddDefaultTokenProviders();
+
 //Add Authentication
-//builder.Services.AddAuthentication(options =>
-//{
-     
-//})
+var jwtIssuer = builder.Configuration.GetSection("Jwt:Issuer").Get<string>();
+var jwtKey = builder.Configuration.GetSection("Jwt:Secret").Get<string>();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    //Add JWT Bearer
+    .AddJwtBearer(options =>
+    {
+        options.SaveToken = true;
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuerSigningKey = true,
+            ValidateIssuer = true,
+            ValidIssuer = jwtIssuer,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+        };
+    });
 
 
 builder.Services.AddScoped<IProcessStorage, ProcessStorage>();
@@ -65,6 +87,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+//Add Authorization & Authentication
+app.UseAuthentication();
+app.UseAuthorization();
 
 //pt folosirea API din alta parte
 app.UseCors("MyPolicy");

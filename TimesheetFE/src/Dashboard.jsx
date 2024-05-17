@@ -109,7 +109,6 @@ const Dashboard = ({ props }) => {
                 }}
                 pageSizeOptions={[10]}
             />
-
         </Box>
     );
 }

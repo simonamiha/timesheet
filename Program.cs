@@ -48,6 +48,7 @@ builder.Services.AddAuthentication(options =>
         {
             ValidateIssuerSigningKey = true,
             ValidateIssuer = true,
+            ValidateAudience = false,
             ValidIssuer = jwtIssuer,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
         };
@@ -88,7 +89,6 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-//Add Authorization & Authentication
 app.UseAuthentication();
 app.UseAuthorization();
 

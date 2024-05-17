@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Web.Http.Cors;
 using Timesheet.Interfaces;
@@ -10,6 +11,7 @@ namespace Timesheet.Controller
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("*", "*", "*")]
+    [Authorize]
     public class EmployeeController : ControllerBase
     {
         private readonly IProcessStorage _processStorage;

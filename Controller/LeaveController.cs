@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+using System.Security.Claims;
 using System.Web.Http.Cors;
-using Timesheet.Data;
 using Timesheet.Interfaces;
 
 namespace Timesheet.Controller
@@ -19,6 +17,19 @@ namespace Timesheet.Controller
         public LeaveController(IProcessStorage service)
         {
             _processStorage = service;
+        }
+
+        [HttpGet]
+        [Route("~/api/[controller]/getcurrentuser")]
+        public async Task<ActionResult> GetCurrentUser()
+        {
+
+            var id = User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier).FirstOrDefault()?.Value;
+            if (id == null)
+            {
+                return NotFound();
+            }
+            return Ok(id);
         }
 
         [HttpGet]

@@ -5,21 +5,22 @@ import { useState, useEffect } from "react";
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import Cookies from 'js-cookie';
+import Login from './Login';
+import { Link } from 'react-router-dom';   
 
-const Dashboard = ({ props }) => {
+const Dashboard = () => {
 
     //log in based on user id
     const [employee, setEmployee] = useState({});
-    const [id, setId] = useState(props.id);
+    //const [id, setId] = useState(props.id);
     const [leaves, setLeaves] = useState([]);
 
     useEffect(() => {
 
-        if (!id) return;
-
         const fetchEmployee = async () => {
             try {
-                fetch("https://localhost:7209/api/employee/" + id)
+                fetch("https://localhost:7209/api/employee/" + '466616d6-26e6-4f50-9949-557d9175424d')
                     .then(res => res.json())
                     .then(
                         (result) => {
@@ -31,7 +32,7 @@ const Dashboard = ({ props }) => {
 
         const fetchLeaves = async () => {
             try {
-                fetch("https://localhost:7209/api/Leave/getemployeeleaves/" + id)
+                fetch("https://localhost:7209/api/Leave/getemployeeleaves/" + '466616d6-26e6-4f50-9949-557d9175424d')
                     .then(res => res.json())
                     .then(
                         (result) => {
@@ -43,8 +44,21 @@ const Dashboard = ({ props }) => {
 
         fetchEmployee();
         fetchLeaves();
-    }, [id]);
+    }
+    //, [id]
+);
+    const token = Cookies.get('token');
 
+    if (!token) {
+        return (
+          <>
+            <main style={{ padding: '50px' }}>
+              <p>You&apos;re not logged in.</p>
+              <Link href={'/login'}>Login</Link>
+            </main>
+          </>
+        )
+      }
 
     const colums = [
         { field: "leaveId", headerName: "Leave ID" },

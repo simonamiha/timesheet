@@ -9,8 +9,6 @@ import DeleteLeave from './DeleteLeave';
 
 
 const LeavesTable = () => {
- 
-  const [show, setShow] = useState(false);
 
   const [leaves, setLeaves] = useState([]);
 

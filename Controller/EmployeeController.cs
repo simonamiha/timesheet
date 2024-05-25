@@ -11,7 +11,6 @@ namespace Timesheet.Controller
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("*", "*", "*")]
-    [Authorize]
     public class EmployeeController : ControllerBase
     {
         private readonly IProcessStorage _processStorage;

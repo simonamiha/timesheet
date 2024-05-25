@@ -27,7 +27,6 @@ const Employee = ({ props }) => {
   useEffect(() => {
     if (!id) return;
 
-
     fetch("https://localhost:7209/api/employee/" + id)
       .then(res => res.json())
       .then(

@@ -15,7 +15,10 @@ const EmployeeTable = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://localhost:7209/api/employee/getall")
+    //const headers = {'Authorization': 'Bearer '+ {token}};
+     fetch("https://localhost:7209/api/employee/getall"//, {headers}
+      
+     )
       .then(res => res.json())
       .then(
         (result) => {

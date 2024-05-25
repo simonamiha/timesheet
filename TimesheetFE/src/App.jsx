@@ -8,9 +8,9 @@ export default function App() {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Box sx={{ width: '100%' }}>
-        <Navbar />
-        </Box>
+          <Box sx={{ width: '100%' }}>
+            <Navbar />
+          </Box>
     </LocalizationProvider>
   );
 }

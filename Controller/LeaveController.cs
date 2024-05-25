@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Web.Http.Cors;
@@ -10,6 +11,7 @@ namespace Timesheet.Controller
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("*", "*", "*")]
+    [Authorize]
     public class LeaveController : ControllerBase
     {
         private readonly IProcessStorage _processStorage;

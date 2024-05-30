@@ -15,6 +15,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import Cookies from "js-cookie";
 
 const CreateLeave = () => {
     const [employeeId, setEmployeeId] = useState("");
@@ -50,7 +51,9 @@ const CreateLeave = () => {
         try {
             let res = await fetch('https://localhost:7209/api/Leave/addleave', {
                 method: "POST",
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json',
+                            'Authorization': 'Bearer '+ Cookies.get('token')
+                        },
                 body: JSON.stringify({
                     id: employeeId,
                     leaveStartDate: finalStartDate,

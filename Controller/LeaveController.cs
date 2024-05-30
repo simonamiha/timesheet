@@ -27,9 +27,15 @@ namespace Timesheet.Controller
             var id = User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier).FirstOrDefault()?.Value;
             if (id == null)
             {
+                return NotFound(); 
+            }
+            //return Ok(id);
+            var employee = await _processStorage.GetEmployee(id);
+            if (employee == null)
+            {
                 return NotFound();
             }
-            return Ok(id);
+            return Ok(employee);
         }
 
         [HttpGet]

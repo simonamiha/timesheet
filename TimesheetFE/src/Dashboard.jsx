@@ -6,59 +6,71 @@ import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import Cookies from 'js-cookie';
-import Login from './Login';
-import { Link } from 'react-router-dom';   
+import UpdateLeave from './UpdateLeave';
+import DeleteLeave from './DeleteLeave';
 
 const Dashboard = () => {
-
     //log in based on user id
+    const [id, setId] = useState();
     const [employee, setEmployee] = useState({});
-    //const [id, setId] = useState(props.id);
     const [leaves, setLeaves] = useState([]);
 
+
     useEffect(() => {
+        const fetchId = async () => {
+            try {
+                fetch("https://localhost:7209/api/Leave/getcurrentuser", {
+                    headers: {'Authorization': 'Bearer '+ Cookies.get('token')}
+                    })
+                    .then(res => res.json())
+                    .then(
+                        (result) => {
+                            setId(result.id);
+                            }
+                        )
+                } catch (err) { }
+            };
 
         const fetchEmployee = async () => {
             try {
-                fetch("https://localhost:7209/api/employee/" + '466616d6-26e6-4f50-9949-557d9175424d')
+                fetch("https://localhost:7209/api/employee/" + id)
                     .then(res => res.json())
                     .then(
                         (result) => {
                             setEmployee(result);
                         }
                     );
-            } catch (err) { }
+            } catch (err) {
+                console.log(err);
+                throw err;
+             }
         };
 
         const fetchLeaves = async () => {
             try {
-                fetch("https://localhost:7209/api/Leave/getemployeeleaves/" + '466616d6-26e6-4f50-9949-557d9175424d')
+                fetch("https://localhost:7209/api/Leave/getemployeeleaves?id=" + id, {
+                    headers: {'Authorization': 'Bearer '+ Cookies.get('token')}
+                }
+                )
                     .then(res => res.json())
                     .then(
                         (result) => {
                             setLeaves(result);
                         }
                     );
-            } catch (err) { }
+            } catch (err) {
+                console.log(err);
+                throw err;
+             }
         };
 
-        fetchEmployee();
-        fetchLeaves();
-    }
-    //, [id]
-);
-    const token = Cookies.get('token');
+        fetchId().then( () => {
+            fetchEmployee();
+            fetchLeaves();
+        });
 
-    if (!token) {
-        return (
-          <>
-            <main style={{ padding: '50px' }}>
-              <p>You&apos;re not logged in.</p>
-              <Link href={'/login'}>Login</Link>
-            </main>
-          </>
-        )
-      }
+    }, [id]);
+
 
     const colums = [
         { field: "leaveId", headerName: "Leave ID" },
@@ -75,7 +87,7 @@ const Dashboard = () => {
                 return <UpdateLeave
                     props={{
                         leaveId: params.row.leaveId,
-                        employeeId: params.row.id,
+                        employeeId: params.row.employeeId,
                         leaveStartDate: params.row.leaveStartDate,
                         leaveEndDate: params.row.leaveEndDate,
                         leaveStatus: params.row.leaveStatus
@@ -88,7 +100,7 @@ const Dashboard = () => {
             renderCell: (params) => {
 
                 return <DeleteLeave
-                    change={handleState}
+                    //change={handleState}
                     props={{
                         leaveId: params.row.leaveId
                     }} />;
@@ -127,4 +139,4 @@ const Dashboard = () => {
     );
 }
 
-export default Dashboard
+export default Dashboard;

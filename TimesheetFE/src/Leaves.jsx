@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import CreateLeave from './CreateLeave';
 import UpdateLeave from './UpdateLeave';
 import DeleteLeave from './DeleteLeave';
+import Cookies from 'js-cookie';
 
 
 const LeavesTable = () => {
@@ -13,7 +14,9 @@ const LeavesTable = () => {
   const [leaves, setLeaves] = useState([]);
 
   useEffect(() => {
-    fetch("https://localhost:7209/api/Leave/getall")
+    fetch("https://localhost:7209/api/Leave/getall", {
+      headers: {'Authorization': 'Bearer '+ Cookies.get('token')}
+      })
       .then(res => res.json())
       .then(
         (result) => {

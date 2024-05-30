@@ -6,6 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import LeavesTable from './Leaves';
+import Cookies from 'js-cookie';
 
 
 const DeleteLeave = ({ props, change }) => {
@@ -27,6 +28,7 @@ const DeleteLeave = ({ props, change }) => {
         try {
             let res = await fetch("https://localhost:7209/api/Leave/deleteLeave?id=" + leaveId, {
                 method: 'DELETE',
+                headers: {'Authorization': 'Bearer '+ Cookies.get('token')}
             });
 
             if (res.status === 200) {

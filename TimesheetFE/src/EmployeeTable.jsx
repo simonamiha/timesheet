@@ -6,13 +6,11 @@ import Box from '@mui/material/Box';
 import CreateEmployee from './CreateEmployee';
 import UpdateEmployee from './UpdateEmployee';
 import DeleteEmployee from './DeleteEmployee';
-import { useNavigate } from "react-router-dom";
 import Employee from './Employee';
 
 const EmployeeTable = () => {
 
   const [employees, setEmployees] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     //const headers = {'Authorization': 'Bearer '+ {token}};
@@ -67,7 +65,7 @@ const EmployeeTable = () => {
       renderCell: (params) => {
 
         return <DeleteEmployee
-          change={handleState}
+          //change={handleState}
           props={{
             employeeId: params.row.id
           }} />;

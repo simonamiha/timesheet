@@ -9,11 +9,10 @@ import Cookies from 'js-cookie';
 const Login = () => {
   const [userEmail, setUserEmail] = useState();
   const [password, setPassword] = useState();
-  const [token, setToken] = useState('');
 
   async function handleSubmit(e) {
     e.preventDefault()
-     fetch('https://localhost:7209/api/Authentication/login',{
+    fetch('https://localhost:7209/api/Authentication/login',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -22,15 +21,15 @@ const Login = () => {
         email: userEmail,
         passwordHash: password
       })
-    }).then(data => data.json())
+    })
+    .then(data => data.json())
     .then(
       (data) => {
         Cookies.set('token', data.token);
         setUserEmail('')
         setPassword('')
-      }
-    )
-  };
+      })
+    };
 
   return(
     <Box component="form" onSubmit={handleSubmit} id="form"

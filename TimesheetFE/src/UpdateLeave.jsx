@@ -15,6 +15,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import EditIcon from '@mui/icons-material/Edit';
+import Cookies from "js-cookie";
 
 const UpdateLeave = ({props}) => {
     const [leaveId, setLeaveId] = useState(props.leaveId);
@@ -56,7 +57,9 @@ const UpdateLeave = ({props}) => {
         try {
             let res = await fetch('https://localhost:7209/api/Leave/updateLeave', {
                 method: "PUT",
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json',
+                           'Authorization': 'Bearer '+ Cookies.get('token')
+                         },
                 body: JSON.stringify({
                     leaveId: leaveId,
                     id: employeeId,

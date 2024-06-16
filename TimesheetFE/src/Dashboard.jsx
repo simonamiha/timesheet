@@ -4,10 +4,12 @@ import { DataGrid } from '@mui/x-data-grid';
 import { useState, useEffect } from "react";
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
 import Cookies from 'js-cookie';
 import UpdateLeave from './UpdateLeave';
 import DeleteLeave from './DeleteLeave';
+import CreateLeave from './CreateLeave';
+import { Typography } from '@mui/material';
+import Divider from '@mui/material/Divider';
 
 const Dashboard = () => {
     //log in based on user id
@@ -110,21 +112,38 @@ const Dashboard = () => {
 
 
     return (
-        <Box>
-            <Stack
-                direction="column"
-                justifyContent="flex-start"
-                alignItems="flex-start"
-            >
+        <Box sx={{  
+                    display: "flex",
+                    bgcolor: "#f9f9f9",
+                    borderRadius: 3,
+                    flexDirection: "column",
+                    justifyContent: "flex-start", 
+                    alignItems: "flex-start",
+                    ml:"30rem",
+                    mr:"30rem", 
+                    p: 2}}>
                 <Avatar
                     alt={employee.lastName}
                     sx={{ width: 60, height: 60 }}
                 />
-                <h2>{employee.lastName} {employee.firstName} ({employee.id})</h2>
-                <h3>Job Title: {employee.jobTitle}</h3>
-                <h3>Department: {employee.departmentName}</h3>
-            </Stack>
-            <DataGrid sx={{ m: 2 }}
+                <Typography variant="h5">
+                    {employee.lastName} {employee.firstName}
+                </Typography>
+                <Typography variant="caption" gutterBottom>
+                Id: {employee.id}
+                </Typography>
+                <Typography variant="h6">
+                    Job Title: {employee.jobTitle}
+                </Typography>
+                <Typography variant="h6">
+                    Department: {employee.departmentName}
+                </Typography>
+            <Divider flexItem>Leaves</Divider>
+            <CreateLeave 
+                    props={{
+                        employeeId: employee.id
+                    }} />
+            <DataGrid 
                 rows={leaves}
                 columns={colums}
                 getRowId={(row) => row.leaveId}

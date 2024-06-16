@@ -112,13 +112,13 @@ const UpdateLeave = ({props}) => {
                                 format="YYYY/MM/DD"
                                 onChange={(newValue) => setLeaveEndDate(newValue)}
                             />
-                            <Select variant="outlined" value={LeaveStatus} onChange={(_, newValue) => setLeaveStatus(newValue.props.value)}>
+                            <Select variant="outlined" value={leaveStatus} onChange={(_, newValue) => setLeaveStatus(newValue.props.value)}>
                                 <MenuItem value={LeaveStatus.Approved}>Approved</MenuItem>
                                 <MenuItem value={LeaveStatus.Rejected}>Rejected</MenuItem>
                                 <MenuItem value={LeaveStatus.Pending}>Pending</MenuItem>
                                 <MenuItem value={LeaveStatus.Cancelled}>Cancelled</MenuItem>
                             </Select>
-                            <Select variant="outlined" value={LeaveType} onChange={(_, newValue) => setLeaveType(newValue.props.value)}>
+                            <Select variant="outlined" value={leaveType} onChange={(_, newValue) => setLeaveType(newValue.props.value)}>
                                 <MenuItem value={LeaveType.WorkingDay}>Working Day</MenuItem>
                                 <MenuItem value={LeaveType.AnnualLeave}>Annual Leave</MenuItem>
                                 <MenuItem value={LeaveType.SpecialLeave}>Special Leave</MenuItem>

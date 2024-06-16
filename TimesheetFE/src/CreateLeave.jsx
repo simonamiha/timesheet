@@ -110,7 +110,7 @@ const CreateLeave = () => {
                                 onChange={(newValue) => setLeaveEndDate(newValue)}
                                 sx={{mb: 1}}
                             />
-                            <Select sx={{width: 120}} variant="outlined" value={LeaveStatus} onChange={(_, newValue) => setLeaveStatus(newValue.props.value)}>
+                            <Select id="leave-status" sx={{width: 120}} label="Status" variant="outlined" value={leaveStatus} onChange={(_, newValue) => setLeaveStatus(newValue.props.value)}>
                                 <MenuItem value={LeaveStatus.Approved}>Approved</MenuItem>
                                 <MenuItem value={LeaveStatus.Rejected}>Rejected</MenuItem>
                                 <MenuItem value={LeaveStatus.Pending}>Pending</MenuItem>

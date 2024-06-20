@@ -63,7 +63,7 @@ namespace Timesheet.Controller
 
         [HttpPut]
         [Route("updateemployee")]
-        public async Task<ActionResult<Employee>> PutProduct(Employee employee)
+        public async Task<ActionResult<Employee>> PutEmployee(Employee employee)
         {
             EmployeeValidator validator = new EmployeeValidator();
 

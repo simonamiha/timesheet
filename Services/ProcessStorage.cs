@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Timesheet.Data;
 using Timesheet.Interfaces;
 
@@ -43,11 +44,21 @@ namespace Timesheet.Services
 
         public async Task<Employee> UpdateEmployee(Employee employee)
         {
-            _employeeContext.Entry(employee).State = EntityState.Modified;
+            //_employeeContext.Entry(employee).State = EntityState.Modified;
+            //Employee user = await userManager.FindByIdAsync(employee.Id);
+
+            //user.FirstName = employee.FirstName;
+
+            var oldEmployee = await _employeeContext.Employees.FirstOrDefaultAsync(x => x.Id == employee.Id);
+            oldEmployee.FirstName = employee.FirstName;
+            oldEmployee.LastName = employee.LastName;
+            oldEmployee.JobTitle = employee.JobTitle;
+            oldEmployee.DepartmentName = employee.DepartmentName;
 
             try
             {
                 await _employeeContext.SaveChangesAsync();
+                //await userManager.UpdateAsync(user);
             }
 
             catch (DbUpdateConcurrencyException)

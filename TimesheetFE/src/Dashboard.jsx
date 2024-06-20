@@ -66,10 +66,9 @@ const Dashboard = () => {
              }
         };
 
-        fetchId().then( () => {
-            fetchEmployee();
-            fetchLeaves();
-        });
+        fetchId();
+        fetchEmployee();
+        fetchLeaves();
 
     }, [id]);
 
